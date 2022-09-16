@@ -1,0 +1,39 @@
+.buttonmore{
+    width: 240px;
+    padding: 50px 40px 80px;
+    margin: 0 auto;
+}
+
+.buttonmore__button{
+    width: 240px;
+    height: 36px;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    color: #000000;
+    padding: 0;
+    border: 2px solid #E8E8E8;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+@media screen and (min-width:768px) {
+    .buttonmore{
+        width: 320px;
+    }
+    
+    .buttonmore__button{
+        width: 320px;
+        opacity: 1;
+        transition-property: opacity;
+        transition-duration: 0.2s;
+        transition-timing-function: linear;
+    }
+
+    .buttonmore__button:hover{
+        opacity: 0.6;
+    }
+}

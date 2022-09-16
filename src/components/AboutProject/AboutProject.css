@@ -1,0 +1,220 @@
+.aboutproject{
+    width: 284px;
+    margin: 0 auto;
+}
+
+.aboutproject__title{
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -0.04em;
+    color: #000000;
+    margin: 0;
+    margin-top: 70px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid #000000;
+}
+
+.aboutproject__list{
+    margin: 0;
+    padding: 0;
+    margin-top: 60px;
+    list-style: none;
+}
+
+.aboutproject__item{
+    margin-bottom: 56px;
+}
+
+.aboutproject__item:last-child{
+    margin-bottom: 60px;
+}
+
+.aboutproject__subtitle{
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -0.04em;
+    color: #000000;
+    margin: 0;
+    margin-bottom: 16px;
+}
+
+.aboutproject__text{
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 16px;
+    color: #000000;
+    margin: 0;
+}
+
+.aboutproject__numbers{
+    margin-bottom: 70px;
+}
+
+.aboutproject__indicators{
+    display: flex;
+    align-items: center;
+}
+
+.aboutproject__index{
+    height: 35px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: #000000;
+}
+
+.aboutproject__index_backend{
+    width: 100px;
+    background-color: #2BE080;
+}
+
+.aboutproject__index_frontend{
+    width: 184px;
+    background-color: #F2F2F2;
+}
+
+.aboutproject__description{
+    width: 80px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: #A0A0A0;
+    margin-top: 10px;
+}
+
+.aboutproject__description_backend{
+    margin-left: 10px;
+    margin-right: 62px;
+}
+
+@media screen and (min-width: 768px) {
+    .aboutproject{
+        width: 668px;
+    }
+
+    .aboutproject__title{
+        margin-top: 90px;
+        font-size: 22px;
+        line-height: 27px;
+        padding-bottom: 23px;
+    }
+
+    .aboutproject__list{
+        margin-top: 70px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .aboutproject__item{
+        width: 319px;
+        margin-bottom: 93px;
+    }
+
+    .aboutproject__subtitle{
+        font-size: 20px;
+        line-height: 24px;
+        margin-bottom: 22px;
+    }
+
+    .aboutproject__text{
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .aboutproject__numbers{
+        margin-bottom: 90px;
+    }
+    
+    .aboutproject__index{
+        height: 36px;
+        font-size: 14px;
+        line-height: 17px;
+    }
+    
+    .aboutproject__index_backend{
+        width: 140px;
+    }
+    
+    .aboutproject__index_frontend{
+        width: 528px;
+    }
+    
+    .aboutproject__description{
+        width: 120px;
+        font-size: 14px;
+        line-height: 17px;
+        margin-top: 14px;
+    }
+    
+    .aboutproject__description_backend{
+        margin-left: 10px;
+        margin-right: 214px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .aboutproject{
+        width: 1140px;
+    }
+
+    .aboutproject__title{
+        margin-top: 110px;
+    }
+
+    .aboutproject__item{
+        width: 550px;
+        margin-bottom: 110px;
+    }
+
+    .aboutproject__subtitle{
+        margin-bottom: 26px;
+    }
+
+    .aboutproject__text{
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .aboutproject__numbers{
+        margin-bottom: 110px;
+    }
+    
+    .aboutproject__index_backend{
+        width: 228px;
+    }
+    
+    .aboutproject__index_frontend{
+        width: 912px;
+    }
+    
+    .aboutproject__description{
+        width: 200px;
+    }
+    
+    .aboutproject__description_backend{
+        margin-left: 14px;
+        margin-right: 370px;
+    }
+}
+
