@@ -12,7 +12,7 @@ function SearchForm(){
             <div className='searchform__content'>
                 <form className='searchform__form' onSubmit={handleSubmit} name = 'searchform'>
                     <div className='searchform__icon'></div>
-                    <input className='searchform__input' placeholder='Фильм'></input>
+                    <input className='searchform__input' placeholder='Фильм' required></input>
                     <button className='searchform__button' type='submit'></button>
                 </form>
                 <FilterCheckbox/>

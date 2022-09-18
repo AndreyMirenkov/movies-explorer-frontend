@@ -39,7 +39,6 @@
     font-size: 14px;
     line-height: 20px;
     color: #A0A0A0;
-    outline: none
 }
 
 .searchform__button{
@@ -48,7 +47,7 @@
     height: 34px;
     border: 0;
     padding: 0;
-    background-color: #fff;
+    background-color: #f9f9f9;
     background-repeat: no-repeat;
     margin-left: 46px;
     cursor: pointer;
@@ -93,6 +92,17 @@
     .searchform__input{
         width: 338px;
         font-size: 18px;
+    }
+
+    .searchform__button{
+        opacity: 1;
+        transition-property: opacity;
+        transition-duration: 0.2s;
+        transition-timing-function: linear;
+    }
+
+    .searchform__button:hover{
+        opacity: 0.7;
     }
 }
 
