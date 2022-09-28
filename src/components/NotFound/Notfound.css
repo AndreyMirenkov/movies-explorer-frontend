@@ -1,0 +1,78 @@
+.notfound{
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 329px;
+}
+
+.notfound__number-error{
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 80px;
+    line-height: 97px;
+    color: #000000;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.notfound__text{
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    color: #000000;
+    margin: 0;
+    margin-bottom: 284px;
+}
+
+.notfound__button{
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    color: #2BE080;
+    border: 0;
+    background-color: #fff;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+@media screen and (min-width: 768px) {
+    .notfound{
+        width: 400px;
+        padding-top: 408px;
+    }
+    
+    .notfound__number-error{
+        font-size: 140px;
+        line-height: 169px;
+        margin-bottom: 5px;
+    }
+    
+    .notfound__text{
+        font-size: 16px;
+        line-height: 19px;
+        margin-bottom: 184px;
+    }
+    
+    .notfound__button{
+        font-size: 14px;
+        line-height: 17px;
+        margin-bottom: 222px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .notfound{
+        padding-top: 246px;
+    }
+    
+    .notfound__button{
+        margin-bottom: 60px;
+    }
+}

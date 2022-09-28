@@ -1,0 +1,127 @@
+.searchform{
+    width: 300px;
+    margin: 0 auto;
+}
+
+.searchform__content{    
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 80px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #E8E8E8;
+    padding-bottom: 44px;
+}
+
+.searchform__form{
+    height: 72px;
+    background-color: #F9F9F9;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 46px;
+}
+
+.searchform__icon{
+    display: none;
+}
+
+.searchform__input{
+    width: 182px;
+    height: 22px;
+    padding: 0;
+    border: 0;
+    margin: 0;
+    background-color: #F9F9F9;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #A0A0A0;
+}
+
+.searchform__button{
+    background-image: url(../../images/search-button.svg);
+    width: 34px;
+    height: 34px;
+    border: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    background-repeat: no-repeat;
+    margin-left: 46px;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+    .searchform{
+        width: 708px;
+        height: 72px;
+        border-bottom: 1px solid #E8E8E8;
+        padding-bottom: 109px;
+        margin-bottom: 10px;
+    }
+
+    .searchform__content{    
+        width: 708px;
+        display: flex;
+        flex-wrap: wrap;
+        background-color: #F9F9F9;
+        margin-bottom: 0;
+        border-bottom: 0;
+        padding-bottom: 0;
+    }
+    
+    .searchform__form{
+        width: 500px;
+        justify-content: flex-start;
+        margin-bottom: 0px;
+
+    }
+    
+    .searchform__icon{
+        display: block;
+        background-image: url(../../images/search-icon.svg);
+        width: 22px;
+        height: 22px;
+        margin-left: 25px;
+        padding-right: 16px;
+        background-repeat: no-repeat;
+    }
+
+    .searchform__input{
+        width: 338px;
+        font-size: 18px;
+    }
+
+    .searchform__button{
+        opacity: 1;
+        transition-property: opacity;
+        transition-duration: 0.2s;
+        transition-timing-function: linear;
+    }
+
+    .searchform__button:hover{
+        opacity: 0.7;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .searchform{
+        width: 1140px;
+        padding-bottom: 69px;
+    }
+
+    .searchform__content{    
+        width: 1140px;
+        margin-top: 70px;
+    }
+    
+    .searchform__form{
+        width: 913px;
+    }
+
+    .searchform__input{
+        width: 740px;
+    }
+}
