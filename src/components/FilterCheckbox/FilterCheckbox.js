@@ -1,14 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
 
-function FilterCheckbox(){
+function FilterCheckbox({checked, checkedCheckbox}){
 
-    const [checked, setChecked] = useState(true)
+    // const [checked, setChecked] = useState(true)
 
     
-    function checkedCheckbox(){
-        setChecked(!checked)
-    }
+    // function checkedCheckbox(){
+    //     setChecked(!checked)
+    // }
 
     return(
         <section className='filtercheckbox'>

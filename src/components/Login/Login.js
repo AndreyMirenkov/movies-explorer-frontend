@@ -1,24 +1,14 @@
 import React from "react";
-import {useState} from 'react'
 import FormAuth from "../FormAuth/FormAuth";
+import useFormWithValidation from "../../utils/Validation";
 
-function Login(){
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+function Login({handleLogin}){
 
-    function handleEmailChange(e){
-        setEmail(e.target.value);
-    }
-
-    function handlePasswordChange(e){
-        setPassword(e.target.value);
-    }
+    const { values, handleChange, errors, isValid } = useFormWithValidation();
 
     function handleSubmit(e){
         e.preventDefault()
-        if(!email || !password){
-            return;
-        }
+        handleLogin(values.email, values.password)
     }
 
     return(
@@ -32,11 +22,11 @@ function Login(){
                 buttonText = 'Войти' 
                 text = 'Ещё не зарегистрированы?' 
                 linkText = 'Регистрация'
-                link = '/signup' 
-                email = {email} 
-                password = {password} 
-                handleEmailChange = {handleEmailChange} 
-                handlePasswordChange = {handlePasswordChange} />
+                link = '/signup'
+                values = {values}
+                handleChange = {handleChange}
+                errors = {errors}
+                isValid = {isValid} />
             </div>
         </div>
     )

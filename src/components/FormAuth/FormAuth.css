@@ -35,6 +35,10 @@
     color: #000000;
 }
 
+.form__input_error{
+    color: #EE3465;
+}
+
 .form__error{
     font-family: 'Inter', Arial, Helvetica, sans-serif;
     font-style: normal;
@@ -64,6 +68,10 @@
 
 .form__button_login{
     margin-top: 309px;
+}
+
+.form__button_disabled{
+    background:  #a0a0a0;
 }
 
 .form__text{

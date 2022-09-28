@@ -1,25 +1,17 @@
 import React from 'react';
-import {  useContext, useState, useEffect } from 'react'
+import {  useContext, useEffect } from 'react'
 import currentUserContext from '../../contexts/CurrentUserContext';
+import useFormWithValidation from '../../utils/Validation';
 
-function Profile({ onUpdateUser, signOut }){
+function Profile({ titleName, onUpdateUser, signOut }){
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+    const { values, handleChange, errors, isValid, setValues } = useFormWithValidation();
     const currentUser = useContext(currentUserContext);
+    const edit = currentUser.name !== values.name || currentUser.email !== values.email;
 
     useEffect(() => {
-        setName(currentUser.name);
-        setEmail(currentUser.email);
-    },[currentUser])
-
-    function handleNameChange(e){
-        setName(e.target.value);
-    }
-
-    function handleEmailChange(e){
-        setEmail(e.target.value);
-    }
+        setValues({name: currentUser.name, email: currentUser.email})
+    },[currentUser, setValues])
 
     const onClose = () => {
         signOut();
@@ -27,27 +19,33 @@ function Profile({ onUpdateUser, signOut }){
 
     function handleSubmit(e) {
         e.preventDefault();
-        onUpdateUser({
-            name, 
-            email
-        });
+        onUpdateUser(
+            values.name, 
+            values.email
+        );
       }
 
     return(
         <section className = 'profile'>
-            <h2 className = 'profile__title'>Привет, {name}!</h2>
+            <h2 className = 'profile__title'>Привет, {titleName}!</h2>
             <form className = 'profile__form' onSubmit={handleSubmit}>
                 <ul className='profile__list'>
                     <li className = 'profile__item'>
-                        <p className = 'profile__subtitle'>Имя</p>
-                        <input className = 'profile__input profile__input_type-name' type = 'text' name = 'name' onChange={handleNameChange} value = {name} minLength = '2' maxLength = '30' required></input>
+                        <div className='profile__input-block'>
+                            <p className = 'profile__subtitle'>Имя</p>
+                            <input className = {`profile__input profile__input_type-name ${errors.name ? 'profile__input_error' : ''}`} type = 'text' name = 'name' onChange={handleChange} defaultValue = {values.name} minLength = '2' maxLength = '30' required></input>
+                        </div>
+                        <span className="profile__error" id = 'error-name'>{errors.name}</span>
                     </li>
                     <li className = 'profile__item'>
-                        <p className = 'profile__subtitle'>E-mail</p>
-                        <input className = 'profile__input profile__input_type-email' type = 'email' name = 'email' onChange={handleEmailChange} value = {email} minLength = '5' maxLength = '40' required></input>
+                        <div className='profile__input-block'>
+                            <p className = 'profile__subtitle'>E-mail</p>
+                            <input className = {`profile__input profile__input_type-email ${errors.email ? 'profile__input_error' : ''}`} type = 'email' name = 'email' onChange={handleChange} defaultValue = {values.email} minLength = '5' maxLength = '40' required></input>
+                        </div>
+                        <span className="profile__error" id = 'error-name'>{errors.email}</span>
                     </li>
                 </ul>
-                <button className='profile__button profile__button_edit' type = 'submit'>Редактировать</button>
+                <button className = {`profile__button profile__button_edit ${isValid ? '' : 'profile__button_disabled'}`} type = 'submit' disabled ={!isValid && !edit}>Редактировать</button>
             </form>
             <button className='profile__button profile__button_signout' type = 'click' onClick={onClose} >Выйти из аккаунта</button>
         </section>
