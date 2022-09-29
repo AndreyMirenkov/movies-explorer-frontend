@@ -1,10 +1,11 @@
 import React from "react";
-import noOk from '../../images/notOk.svg'
+import noOk from '../../images/notOk.svg';
+import ok from '../../images/ok.svg';
 
 
-function InfoTooltip({isOpen, onClose, popupText}){
+function InfoTooltip({isOpen, onClose, popupText, successful}){
 
-    const img = noOk;
+    const img = successful ? ok : noOk;
 
     return(
         <div className={`popup ${isOpen ? "popup_opened" : ''}`}>

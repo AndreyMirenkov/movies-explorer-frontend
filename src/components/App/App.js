@@ -21,9 +21,9 @@ import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 function App() {
 
-    const [name, setName] = useState('')
     const [loggedIn, setLoggedIn] = useState(false);
     const [isNavigationOpen, setNavigationPopup] = useState(false)
+    const [myMoviesOnPage, setMyMoviesOnPage] = useState(false);
     const [currentUser, setCurrentUser] = useState({name: '', email: ''});
     const [moviesData, setMoviesData] = useState([]);
     const [filterMovies, setFilterMovies] = useState([]);
@@ -38,6 +38,8 @@ function App() {
     const [permission, setPermission] = useState('');
     const [popupOpen, setPopupOpen] = useState(false);
     const [popupText, setPopupText] = useState('')
+    const [successfulFormSubmit, setSuccessfulFormSubmit] = useState(true);
+    const [moviesOnPage, setMoviesOnPage] = useState(false);
     const history = useHistory();
 
     const [index , setIndex] = useState (0)
@@ -59,7 +61,6 @@ function App() {
         PAGE_SIZE = 12;
         quantityNewCard = 3;
     }
-
     function checkedPermission(){
             if ((window.innerWidth < '1280') && (window.innerWidth >= '768')){
                 PAGE_SIZE = 8;
@@ -73,7 +74,6 @@ function App() {
             }
     }
 
-
     useEffect(() => {
         window.addEventListener('resize', checkedPermission);
         return () => {window.removeEventListener('resize', checkedPermission)};
@@ -83,7 +83,6 @@ function App() {
         MainApi.getProfile()
             .then(res => {
                 setCurrentUser(res.data);
-                setName(res.data.name);
             }).catch(res => console.log(res));
     }, [])
 
@@ -106,7 +105,6 @@ function App() {
         MainApi.getProfile()
             .then(res => {
                 setCurrentUser(res.data);
-                setName(res.data.name);
             }).catch(res => console.log(res));
         }
     }, [loggedIn])
@@ -153,6 +151,11 @@ function App() {
             setFilterMovies(data);
             setIndex(PAGE_SIZE);
             setQuantityFilteredMovies(data.length)
+            if (data.length){
+                setMoviesOnPage(true);
+            } else {
+                setMoviesOnPage(false);
+            }
             if (data.length > PAGE_SIZE){
                 setVisibleButton(true);
             }
@@ -179,13 +182,19 @@ function App() {
                 if (movie.owner === currentUser._id){
                     newArray.push(movie);
                 }
-        })
+        }) 
         setMyMovies(newArray);
         if(localStorage.getItem('filteredMyMovies')){
             const data = JSON.parse(localStorage.getItem('filteredMyMovies'))
             setMyFilterMovies(data);
+            setMyMoviesOnPage(true);
         } else {
             setMyFilterMovies(newArray)
+            if (newArray.length){
+                setMyMoviesOnPage(true);
+            } else {
+                setMyMoviesOnPage(false);
+            }
         }
         }
     }
@@ -198,6 +207,7 @@ function App() {
             if (res === 409){
                 setPopupText('Этот email уже используется.')
                 setPopupOpen(true);
+                setSuccessfulFormSubmit(false);
             } else {
                 console.log(res)
             }
@@ -212,6 +222,7 @@ function App() {
           if (res === 401){
             setPopupText('Неправильные почта или пароль')
             setPopupOpen(true);
+            setSuccessfulFormSubmit(false);
           } else {  
             console.log(res)
           }
@@ -233,11 +244,14 @@ function App() {
         return MainApi.updateProfile(name, email)
             .then((res => {
                 setCurrentUser(res.data);
-                setName(res.data.name);
+                setPopupText('Данные успешно сохранены');
+                setPopupOpen(true);
+                setSuccessfulFormSubmit(true);
             })).catch((res) =>{
                 if (res === 409){
-                    setPopupText('Этот email уже используется.')
+                    setPopupText('Этот email уже используется.');
                     setPopupOpen(true);
+                    setSuccessfulFormSubmit(false);
                 } else {
                     console.log(res)
                 }
@@ -250,7 +264,7 @@ function App() {
         setNotFoundMovies(false);
         if (moviesData) {
           const filteredMovies = Filter(searchText, searchParams, moviesData);
-
+            setMoviesOnPage(true);
         if (filteredMovies.length > PAGE_SIZE){
             setVisibleButton(true);
         }
@@ -343,6 +357,7 @@ function App() {
             ).then((newMovie) => {
                 setMyMovies([newMovie.data, ...myMovies]);
                 setMyFilterMovies([newMovie.data, ...myMovies]);
+                setMyMoviesOnPage(true);
             }).catch((res) => console.log(res))
     }
 
@@ -366,6 +381,8 @@ function App() {
                 localStorage.removeItem('checkboxMovies');
                 localStorage.removeItem('checkboxSaveMovies');
                 localStorage.removeItem('filteredMyMovies')
+                localStorage.removeItem('oldSearchTextMovies');
+                localStorage.removeItem('oldSearchTextSaveMovies');
         }).catch((res) => console.log(res))
     }
     
@@ -393,7 +410,8 @@ function App() {
             <InfoTooltip
                     isOpen= {popupOpen}
                     onClose= {closePopup}
-                    popupText = {popupText}/>
+                    popupText = {popupText}
+                    successful = {successfulFormSubmit}/>
                 <Switch>
                 <Route exact path = '/signin'>
                     <Login handleLogin={handleLogin} />
@@ -403,13 +421,14 @@ function App() {
                 </Route>
                 <ProtectedRoute exact path = '/profile' loggedIn={loggedIn} >
                     <Header loggedIn = {loggedIn} onNavigation = {handleMenuClick}/>
-                    <Profile titleName = {name} onUpdateUser={handleUpdateUser} signOut = {signOut}/>
+                    <Profile onUpdateUser={handleUpdateUser} signOut = {signOut}/>
                     <Navigation isOpen = {isNavigationOpen} onClose = {closeMenu}/>
                 </ProtectedRoute>
                 <ProtectedRoute exact path = '/movies' loggedIn={loggedIn} >
                     <Header loggedIn = {loggedIn} onNavigation = {handleMenuClick}/>
                     <Movies 
                     buttonSearch = {handleSearchMovies} 
+                    moviesOnPage = {moviesOnPage}
                     buttonMoreClick={buttonMoreClick} 
                     movies = {visibleData} 
                     visibleButton = {visibleButton} 
@@ -427,6 +446,7 @@ function App() {
                     <Header loggedIn = {loggedIn} onNavigation = {handleMenuClick}/>
                     <SavedMovies
                     buttonSearch = {handleSearchMyMovies} 
+                    moviesOnPage = {myMoviesOnPage}
                     movies = {myFilterMovies} 
                     preloader = {moviesLoading}
                     notFoundMovies = {notFoundMovies}

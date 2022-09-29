@@ -9,7 +9,11 @@ const Filter = (searchText, searchParams, data) => {
     }
   
     if (searchParams) {
-      return data.filter(filterShortfilm).filter(filterParams);
+      if (searchText){
+        return data.filter(filterShortfilm).filter(filterParams);
+      } else {
+        return data.filter(filterShortfilm)
+      }
     } else {
       return data.filter(filterParams);
     }

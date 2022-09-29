@@ -3,7 +3,7 @@ import {  useContext, useEffect } from 'react'
 import currentUserContext from '../../contexts/CurrentUserContext';
 import useFormWithValidation from '../../utils/Validation';
 
-function Profile({ titleName, onUpdateUser, signOut }){
+function Profile({ onUpdateUser, signOut }){
 
     const { values, handleChange, errors, isValid, setValues } = useFormWithValidation();
     const currentUser = useContext(currentUserContext);
@@ -27,7 +27,7 @@ function Profile({ titleName, onUpdateUser, signOut }){
 
     return(
         <section className = 'profile'>
-            <h2 className = 'profile__title'>Привет, {titleName}!</h2>
+            <h2 className = 'profile__title'>Привет, {currentUser.name}!</h2>
             <form className = 'profile__form' onSubmit={handleSubmit}>
                 <ul className='profile__list'>
                     <li className = 'profile__item'>

@@ -2,9 +2,10 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm({handleSearch}){ 
+function SearchForm({handleSearch, moviesOnPage}){ 
 
     const [searchText, setSearchText] = useState('');
+    const [oldSearchText, setOldSearchText] = useState('');
     const [checked, setChecked] = useState(true);
 
 
@@ -14,6 +15,15 @@ function SearchForm({handleSearch}){
         }
         if (localStorage.getItem('searchTextSaveMovies') && window.location.pathname === '/saved-movies'){
             setSearchText(localStorage.getItem('searchTextSaveMovies'));
+        }
+    },[])
+
+    useEffect(() => {
+        if (localStorage.getItem('oldSearchTextMovies') && window.location.pathname === '/movies' ){
+            setOldSearchText(localStorage.getItem('oldSearchTextMovies'));
+        }
+        if (localStorage.getItem('oldSearchTextSaveMovies') && window.location.pathname === '/saved-movies'){
+            setOldSearchText(localStorage.getItem('oldSearchTextSaveMovies'));
         }
     },[])
 
@@ -47,7 +57,19 @@ function SearchForm({handleSearch}){
 
     function handleSubmit(e){
         e.preventDefault();
+        setOldSearchText(searchText);
+        if (window.location.pathname === '/movies'){
+            localStorage.setItem('oldSearchTextMovies', searchText)
+        } else {
+            localStorage.setItem('oldSearchTextSaveMovies', searchText);
+        }
         handleSearch(searchText, !checked);
+    }
+
+    function handlechecked(e){
+        if (moviesOnPage){
+        handleSearch(oldSearchText, checked);
+        }
     }
 
     return(
@@ -58,7 +80,7 @@ function SearchForm({handleSearch}){
                     <input className='searchform__input' onChange={handleSearchChange} name = 'movie' type = 'text' value = {searchText} placeholder='Фильм' required></input>
                     <button className='searchform__button' type='submit'></button>
                 </form>
-                <FilterCheckbox checked = {checked} checkedCheckbox = {checkedCheckbox}/>
+                <FilterCheckbox checked = {checked} checkedCheckbox = {checkedCheckbox} handleClick = {handlechecked}/>
             </div>
         </section>        
     )

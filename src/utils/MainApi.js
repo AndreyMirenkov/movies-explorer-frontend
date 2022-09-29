@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://api.diploma.nomorepartiesxyz.ru'
+export const BASE_URL = 'https://api.diploma.nomoredomains.club'
 
 const headers = {
     'Accept': 'application/json',
