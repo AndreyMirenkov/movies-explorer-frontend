@@ -3,10 +3,11 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 function MoviesCardList({movies, ...props}){
 
+    
     return(
         <section className='moviescardlist'>
-            {movies.map((movie, index) => (
-                <MoviesCard key = {index} movie = {movie} handleLikeClick = {props.handleLikeClick} handleDeleteMovie = {props.handleDeleteMovie} myMovies = {props.myMovies}/>
+            {movies.map((movie) => (
+                <MoviesCard key = {movie.id || movie.movieId} movie = {movie} handleLikeClick = {props.handleLikeClick} handleDeleteMovie = {props.handleDeleteMovie} myMovies = {props.myMovies}/>
             ))
             }
         </section>

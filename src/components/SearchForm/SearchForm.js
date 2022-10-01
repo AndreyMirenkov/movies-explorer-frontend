@@ -2,12 +2,11 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm({handleSearch, moviesOnPage}){ 
+function SearchForm({handleSearch, moviesOnPage, noSearchText, disabledInput}){ 
 
     const [searchText, setSearchText] = useState('');
     const [oldSearchText, setOldSearchText] = useState('');
     const [checked, setChecked] = useState(true);
-
 
     useEffect(() => {
         if (localStorage.getItem('searchTextMovies') && window.location.pathname === '/movies' ){
@@ -57,13 +56,17 @@ function SearchForm({handleSearch, moviesOnPage}){
 
     function handleSubmit(e){
         e.preventDefault();
-        setOldSearchText(searchText);
-        if (window.location.pathname === '/movies'){
-            localStorage.setItem('oldSearchTextMovies', searchText)
+        if (searchText){
+            setOldSearchText(searchText);
+            if (window.location.pathname === '/movies'){
+                localStorage.setItem('oldSearchTextMovies', searchText)
+            } else {
+                localStorage.setItem('oldSearchTextSaveMovies', searchText);
+            }
+            handleSearch(searchText, !checked);
         } else {
-            localStorage.setItem('oldSearchTextSaveMovies', searchText);
-        }
-        handleSearch(searchText, !checked);
+            noSearchText();
+        } 
     }
 
     function handlechecked(e){
@@ -75,9 +78,9 @@ function SearchForm({handleSearch, moviesOnPage}){
     return(
         <section className='searchform'>
             <div className='searchform__content'>
-                <form className='searchform__form' onSubmit={handleSubmit} name = 'searchform'>
+                <form className='searchform__form' onSubmit={handleSubmit} name = 'searchform' noValidate>
                     <div className='searchform__icon'></div>
-                    <input className='searchform__input' onChange={handleSearchChange} name = 'movie' type = 'text' value = {searchText} placeholder='Фильм' required></input>
+                    <input className='searchform__input' onChange={handleSearchChange} name = 'movie' type = 'text' value = {searchText} placeholder='Фильм' required disabled = {disabledInput}></input>
                     <button className='searchform__button' type='submit'></button>
                 </form>
                 <FilterCheckbox checked = {checked} checkedCheckbox = {checkedCheckbox} handleClick = {handlechecked}/>

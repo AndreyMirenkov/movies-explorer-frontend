@@ -6,9 +6,9 @@ function InfoText({notFoundMovies, infoSearchText}){
     return(
         <section className = {infoTextClassName}>
             { 
-                infoSearchText === 'notfound' 
+                infoSearchText 
                 ? 
-                <h2 className = 'infotext__title'>Ничего не найдено</h2>
+                <h2 className = 'infotext__title'>{infoSearchText}</h2>
                 :
                 <h2 className = 'infotext__title'>Во время запроса произошла ошибка. 
                 Возможно, проблема с соединением или сервер недоступен. 

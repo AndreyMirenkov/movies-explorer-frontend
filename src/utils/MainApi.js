@@ -1,3 +1,5 @@
+import validateTrailerLink from "./validateTrailerUrl";
+
 export const BASE_URL = 'https://api.diploma.nomoredomains.club'
 
 const headers = {
@@ -85,7 +87,7 @@ export const createMovies = (country, director, duration, year, description, ima
             year, 
             description, 
             image: `https://api.nomoreparties.co${image}`,
-            trailerLink, 
+            trailerLink: validateTrailerLink(trailerLink), 
             thumbnail: `https://api.nomoreparties.co${thumbnail}`, 
             movieId, 
             nameRU, 

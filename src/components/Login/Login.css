@@ -3,7 +3,8 @@
     width: 38px;
     height: 38px;
     background-repeat: no-repeat;
-    margin: 94px auto 0 ;
+    margin: 94px auto 0;
+    display: block;
 }
 
 

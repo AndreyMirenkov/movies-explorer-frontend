@@ -17,6 +17,7 @@ import * as MainApi from '../../utils/MainApi';
 import {getMovies} from '../../utils/MoviesApi';
 import Filter from '../../utils/Filter';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import {mobile, pad, laptop, quatityNewCardMobile, quatityNewCardPad, quatityNewCardLaptop} from '../../constants/constants';
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
     const [popupText, setPopupText] = useState('')
     const [successfulFormSubmit, setSuccessfulFormSubmit] = useState(true);
     const [moviesOnPage, setMoviesOnPage] = useState(false);
+    const [disabledInput, setDisabledInput] = useState(false);
     const history = useHistory();
 
     const [index , setIndex] = useState (0)
@@ -49,28 +51,28 @@ function App() {
     let PAGE_SIZE = 0
     let quantityNewCard = 0
 
-    if (window.innerWidth < '768'){
+    if (window.innerWidth < pad){
         PAGE_SIZE = 5;
-        quantityNewCard = 2;
+        quantityNewCard = quatityNewCardMobile;
     }
-    if ((window.innerWidth < '1280') && (window.innerWidth >= '768')){
+    if ((window.innerWidth < laptop) && (window.innerWidth >= pad)){
         PAGE_SIZE = 8;
-        quantityNewCard = 2;
+        quantityNewCard = quatityNewCardPad;
     }
-    if (window.innerWidth > '1279'){
+    if (window.innerWidth >= laptop){
         PAGE_SIZE = 12;
-        quantityNewCard = 3;
+        quantityNewCard = quatityNewCardLaptop;
     }
     function checkedPermission(){
-            if ((window.innerWidth < '1280') && (window.innerWidth >= '768')){
+            if ((window.innerWidth < laptop) && (window.innerWidth >= pad)){
                 PAGE_SIZE = 8;
-                quantityNewCard = 2;
-                setPermission('768')
+                quantityNewCard = quatityNewCardPad;
+                setPermission(pad)
             }
-            if (window.innerWidth > '1279'){
+            if (window.innerWidth >= laptop){
                 PAGE_SIZE = 12;
-                quantityNewCard = 3;
-                setPermission('1280');
+                quantityNewCard = quatityNewCardLaptop;
+                setPermission(laptop);
             }
     }
 
@@ -127,10 +129,16 @@ function App() {
     },[])
     
     useEffect(() => {
+        if (localStorage.getItem('allMovies')){
+            const data = JSON.parse(localStorage.getItem('allMovies'))
+            setMoviesData(data);
+        } else {
         getMovies()
             .then(res => {
                 setMoviesData(res)
+                localStorage.setItem('allMovies', JSON.stringify(res))
             })
+        }
     },[])
 
     useEffect(() => {
@@ -178,7 +186,7 @@ function App() {
     const filterMyMovies = () => {
         const newArray = []; 
         if (saveMovies && currentUser._id){
-            saveMovies.map((movie, index) => {
+            saveMovies.map((movie) => {
                 if (movie.owner === currentUser._id){
                     newArray.push(movie);
                 }
@@ -200,6 +208,7 @@ function App() {
     }
 
     const handleRegister = (name, email, password) => {
+        setDisabledInput(true);
         return MainApi.register(name, email, password)
         .then(() => {
             setLoggedIn(true);
@@ -211,10 +220,13 @@ function App() {
             } else {
                 console.log(res)
             }
+        }).finally(() => {
+            setDisabledInput(false);
         })
     }
     
     const handleLogin = (email, password) => {
+        setDisabledInput(true);
         return MainApi.autorize(email, password)
         .then(() => {
                 setLoggedIn(true);
@@ -226,6 +238,8 @@ function App() {
           } else {  
             console.log(res)
           }
+        }).finally(() => {
+            setDisabledInput(false);
         })
 
     }
@@ -241,6 +255,7 @@ function App() {
     
     
     const handleUpdateUser = (name, email) => {
+        setDisabledInput(true);
         return MainApi.updateProfile(name, email)
             .then((res => {
                 setCurrentUser(res.data);
@@ -255,6 +270,8 @@ function App() {
                 } else {
                     console.log(res)
                 }
+        }).finally(() => {
+            setDisabledInput(false);
         })
     }
     
@@ -262,6 +279,8 @@ function App() {
         setMoviesLoading(true);
         setVisibleButton(false);
         setNotFoundMovies(false);
+        setInfoSearchText('')
+        setDisabledInput(true);
         if (moviesData) {
           const filteredMovies = Filter(searchText, searchParams, moviesData);
             setMoviesOnPage(true);
@@ -273,8 +292,9 @@ function App() {
             setTimeout(() => {
                 setMoviesLoading(false);
                 setNotFoundMovies(true);
-                setInfoSearchText('notfound');
+                setInfoSearchText('Ничего не найдено');
                 setFilterMovies(filteredMovies)
+                setDisabledInput(false);
               },250)
           } else {
             setTimeout(() => {
@@ -283,6 +303,7 @@ function App() {
                 setIndex(PAGE_SIZE);
                 setQuantityFilteredMovies(filteredMovies.length)
                 setFilterMovies(filteredMovies);
+                setDisabledInput(false);
               },250)
           }
           localStorage.setItem(
@@ -293,7 +314,7 @@ function App() {
             setTimeout(() => {
                 setMoviesLoading(false);
                 setNotFoundMovies(true);
-                setInfoSearchText('error');
+                setDisabledInput(false);
               },250)
         }
     }
@@ -301,6 +322,8 @@ function App() {
     const handleSearchMyMovies = (searchText, searchParams) => {
         setMoviesLoading(true);
         setNotFoundMovies(false);
+        setInfoSearchText('')
+        setDisabledInput(true);
         if (myMovies) {
             const filteredMovies = Filter(searchText, searchParams, myMovies);
   
@@ -308,14 +331,16 @@ function App() {
               setTimeout(() => {
                   setMoviesLoading(false);
                   setNotFoundMovies(true);
-                  setInfoSearchText('notfound');
-                  setMyFilterMovies(filteredMovies)
+                  setInfoSearchText('Ничего не найдено');
+                  setMyFilterMovies(filteredMovies);
+                  setDisabledInput(false);
                 },250)
             } else {
               setTimeout(() => {
                   setMoviesLoading(false);
                   setNotFoundMovies(false);
                   setMyFilterMovies(filteredMovies);
+                  setDisabledInput(false);
                 },250)
             }
             localStorage.setItem(
@@ -326,9 +351,18 @@ function App() {
               setTimeout(() => {
                   setMoviesLoading(false);
                   setNotFoundMovies(true);
-                  setInfoSearchText('error');
+                  setDisabledInput(false);
                 },250)
           }
+    }
+
+    const noSearchText = () => {
+        setNotFoundMovies(true);
+        setInfoSearchText('Нужно ввести ключевое слово');
+        setTimeout(() => {
+            setNotFoundMovies(false);
+            setInfoSearchText('');
+        }, 2000)
     }
 
     const handleLikeClick = (movie) => {
@@ -383,6 +417,7 @@ function App() {
                 localStorage.removeItem('filteredMyMovies')
                 localStorage.removeItem('oldSearchTextMovies');
                 localStorage.removeItem('oldSearchTextSaveMovies');
+                localStorage.removeItem('allMovies');
         }).catch((res) => console.log(res))
     }
     
@@ -414,14 +449,14 @@ function App() {
                     successful = {successfulFormSubmit}/>
                 <Switch>
                 <Route exact path = '/signin'>
-                    <Login handleLogin={handleLogin} />
+                    <Login handleLogin={handleLogin} disabledInput = {disabledInput}/>
                 </Route>
                 <Route exact path = '/signup'>
-                    <Register  handleRegister={handleRegister} />
+                    <Register  handleRegister={handleRegister} disabledInput = {disabledInput}/>
                 </Route>
                 <ProtectedRoute exact path = '/profile' loggedIn={loggedIn} >
                     <Header loggedIn = {loggedIn} onNavigation = {handleMenuClick}/>
-                    <Profile onUpdateUser={handleUpdateUser} signOut = {signOut}/>
+                    <Profile onUpdateUser={handleUpdateUser} signOut = {signOut} disabledInput = {disabledInput}/>
                     <Navigation isOpen = {isNavigationOpen} onClose = {closeMenu}/>
                 </ProtectedRoute>
                 <ProtectedRoute exact path = '/movies' loggedIn={loggedIn} >
@@ -438,6 +473,8 @@ function App() {
                     handleLikeClick = {handleLikeClick}
                     handleDeleteMovie = {handleDeleteMovie}
                     myMovies = {myMovies}
+                    noSearchText = {noSearchText}
+                    disabledInput = {disabledInput}
                     />
                     <Footer/>
                     <Navigation isOpen = {isNavigationOpen} onClose = {closeMenu} link = {'movies'}/>
@@ -453,6 +490,8 @@ function App() {
                     infoSearchText = {infoSearchText}
                     handleDeleteMovie = {handleDeleteMovie}
                     myMovies = {myMovies}
+                    noSearchText = {noSearchText}
+                    disabledInput = {disabledInput}
                     />
                     <Footer/>
                     <Navigation isOpen = {isNavigationOpen} onClose = {closeMenu} link = {'saved-movies'} />

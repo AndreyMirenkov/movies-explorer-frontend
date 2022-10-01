@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom'
-// import logo from '../../images/logo.svg'
+import { Link, NavLink } from 'react-router-dom';
 
 function Header({ loggedIn, onNavigation }){
 
@@ -12,8 +11,8 @@ function Header({ loggedIn, onNavigation }){
                     {loggedIn ?
                       <div className = 'header__navbar'>
                       <div className= 'header__links'>
-                          <Link to = '/movies' className="header__link header__link_movies">Фильмы</Link>
-                          <Link to = '/saved-movies' className="header__link header__link_saved-movies">Сохранённые фильмы</Link>
+                          <NavLink to = '/movies' className="header__link header__link_movies" activeClassName="header__link_active">Фильмы</NavLink>
+                          <NavLink to = '/saved-movies' className="header__link header__link_saved-movies" activeClassName="header__link_active">Сохранённые фильмы</NavLink>
                        </div>   
                       <button className="header__menu" onClick={onNavigation} />
                       <Link to = '/profile' className="header__link header__link_profile">Аккаунт</Link>

@@ -5,13 +5,13 @@ import ButtonMore from '../ButtonMore/ButtonMore';
 import Preloader from '../Preloader/Preloader';
 import InfoText from '../InfoText/InfoText';
 
-function Movies({buttonSearch, moviesOnPage, buttonMoreClick, movies, visibleButton, preloader, notFoundMovies, infoSearchText, handleLikeClick, handleDeleteMovie, myMovies}){
+function Movies({buttonSearch, moviesOnPage, buttonMoreClick, movies, visibleButton, preloader, notFoundMovies, infoSearchText, handleLikeClick, handleDeleteMovie, myMovies, noSearchText, disabledInput}){
 
     return(
         <section className='movies'>
-            <SearchForm handleSearch = {buttonSearch} moviesOnPage = {moviesOnPage}/>
+            <SearchForm handleSearch = {buttonSearch} moviesOnPage = {moviesOnPage} noSearchText = {noSearchText} disabledInput = {disabledInput}/>
             <Preloader open = {preloader}/>
-            <InfoText notFoundMovies = {notFoundMovies} infoSearchText = {infoSearchText} />
+            <InfoText notFoundMovies = {notFoundMovies} infoSearchText = {infoSearchText}/>
             <MoviesCardList movies = {movies} handleLikeClick = {handleLikeClick} handleDeleteMovie = {handleDeleteMovie} myMovies = {myMovies}/>
             <ButtonMore handleClick={buttonMoreClick} visible = {visibleButton}/>
         </section>

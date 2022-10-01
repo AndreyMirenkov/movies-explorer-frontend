@@ -1,3 +1,5 @@
+import { shortFilmDuration } from "../constants/constants";
+
 const Filter = (searchText, searchParams, data) => {
   
     function filterParams(movie){
@@ -5,7 +7,7 @@ const Filter = (searchText, searchParams, data) => {
     }
   
     function filterShortfilm(movie){
-      return movie.duration <= 40;
+      return movie.duration <= shortFilmDuration;
     }
   
     if (searchParams) {

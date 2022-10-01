@@ -1,8 +1,9 @@
 import React from "react";
 import FormAuth from "../FormAuth/FormAuth";
 import useFormWithValidation from "../../utils/Validation";
+import { Link } from 'react-router-dom'
 
-function Register({handleRegister}){
+function Register({handleRegister, disabledInput}){
 
     const { values, handleChange, errors, isValid } = useFormWithValidation();
 
@@ -15,7 +16,7 @@ function Register({handleRegister}){
     return(
         <div className= 'register'>
             <div className= 'register__content'>
-                <div className = 'register__logo'></div>
+                <Link to = '/' className="register__logo"></Link>
                 <h2 className = 'register__title'>Добро пожаловать!</h2>
                 <FormAuth
                 loggedIn = {false}
@@ -24,6 +25,7 @@ function Register({handleRegister}){
                 text = 'Уже зарегистрированы?' 
                 linkText = 'Войти'
                 link = '/signin'
+                disabledInput = {disabledInput}
                 values = {values}
                 handleChange = {handleChange}
                 errors = {errors}
