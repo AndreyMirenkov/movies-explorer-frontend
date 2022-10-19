@@ -120,7 +120,7 @@
         display: block;
         font-family: 'Inter', Arial, Helvetica, sans-serif;
         font-style: normal;
-        font-weight: 500;
+        font-weight: 400;
         font-size: 13px;
         line-height: 18px;
         color: #000000;
@@ -137,6 +137,10 @@
         color: #000000;
     }
     
+    .header__link_active{
+        font-weight: 500;
+    }
+
     .header__link_profile{
         width: 100px;
         height: 32px;

@@ -1,20 +1,19 @@
 import React from 'react';
-import { useState } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import ButtonMore from '../ButtonMore/ButtonMore';
 import Preloader from '../Preloader/Preloader';
+import InfoText from '../InfoText/InfoText';
 
-function Movies(){
-
-    const [loading, setLoading] = useState(false);
+function Movies({buttonSearch, moviesOnPage, buttonMoreClick, movies, visibleButton, preloader, notFoundMovies, infoSearchText, handleLikeClick, handleDeleteMovie, myMovies, noSearchText, disabledInput}){
 
     return(
         <section className='movies'>
-            <SearchForm/>
-            <Preloader open = {loading}/>
-            <MoviesCardList/>
-            <ButtonMore/>
+            <SearchForm handleSearch = {buttonSearch} moviesOnPage = {moviesOnPage} noSearchText = {noSearchText} disabledInput = {disabledInput}/>
+            <Preloader open = {preloader}/>
+            <InfoText notFoundMovies = {notFoundMovies} infoSearchText = {infoSearchText}/>
+            <MoviesCardList movies = {movies} handleLikeClick = {handleLikeClick} handleDeleteMovie = {handleDeleteMovie} myMovies = {myMovies}/>
+            <ButtonMore handleClick={buttonMoreClick} visible = {visibleButton}/>
         </section>
     )
 }

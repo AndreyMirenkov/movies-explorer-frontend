@@ -1,0 +1,28 @@
+.infotext{
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    display: none;
+}
+
+.infotext_visible{
+    display: block;
+}
+
+.infotext__title{
+    margin: 0;
+    margin-top: 20px;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 18px;
+    text-align: center;
+    color: #EE3465;
+}
+
+@media screen and (min-width: 768px) {
+    .infotext{
+        width: 708px;
+    }
+}

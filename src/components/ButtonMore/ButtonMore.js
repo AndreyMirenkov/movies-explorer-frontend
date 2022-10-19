@@ -1,10 +1,12 @@
 import React from 'react';
 
-function ButtonMore(){
+function ButtonMore({handleClick, visible}){
+
+    const buttonMoreClassnName = `buttonmore__button ${visible ? 'buttonmore__button_visible':''}`
 
     return(
         <div className='buttonmore'>
-            <button className='buttonmore__button' type='button'>Ещё</button>
+            <button className = {buttonMoreClassnName} type='button' onClick={handleClick}>Ещё</button>
         </div>
     )
 }

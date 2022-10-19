@@ -13,7 +13,6 @@
     line-height: 12px;
     color: #A0A0A0;
     margin: 24px auto 5px;
-
 }
 
 .form__field-name:first-child{
@@ -33,6 +32,10 @@
     font-size: 14px;
     line-height: 17px;
     color: #000000;
+}
+
+.form__input_error{
+    color: #EE3465;
 }
 
 .form__error{
@@ -64,6 +67,10 @@
 
 .form__button_login{
     margin-top: 309px;
+}
+
+.form__button_disabled{
+    background:  #a0a0a0;
 }
 
 .form__text{
