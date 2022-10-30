@@ -1,13 +1,26 @@
-# movies-explorer-frontend
+# Movies-explorer-frontend
 
-## Ссылка на макет в Figma
+## Frontend дипломной работы Яндекс.Практикума. Функциональность приложения:
 
-https://www.figma.com/file/3aBeGFFGq9fdixxcOhIh9W/%D0%9C%D0%B0%D0%BA%D0%B5%D1%82?node-id=891%3A3857
+* 🔐 _Регистрация и авторизация пользователей_ 🔐
+* 📝 _Редактирование данных пользователей_ ✏
+* ⌨ _Поиск фильмов на странице_ 🔎
+* ❤ _Сохранение понравившихся фильмов_ ❤
+* 🖊 _Валидация форм_ ✅
 
- ## ссылка на пул реквест
+## Запуск проекта 🚀
+ 1. Клонировать репозиторий
+ 2. `npm i` - устанавливаем все зависимости  
+ 3. `npm run start` — запускает приложение
 
- https://github.com/AndreyMirenkov/movies-explorer-frontend/pull/3
+## Используемые тахнологии
 
- ## ссылка на страницу
+<div display = 'flex' flex-wrap = 'wrap'>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original-wordmark.svg" alt='HTML' width='60' height='60'/>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original-wordmark.svg" alt='CSS' width='60' height='60'/>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original-wordmark.svg" alt = 'React' width = '60' height = '60'/>
+</div>          
 
- https://diploma.nomoredomains.club/
+## Ссылка на страницу
+
+### _https://diploma.nomoredomains.club/_
