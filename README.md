@@ -28,6 +28,3 @@
 * _Исправить проверку JWT-токена_
 * _Переписать проект на TypeScript_
 
-## Ссылка на страницу
-
-### _https://diploma.nomoredomains.club/_
